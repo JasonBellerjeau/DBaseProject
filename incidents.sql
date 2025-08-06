@@ -103,8 +103,25 @@ VALUES(4,2,"Pistol");
 INSERT INTO WEAPON
 VALUES(5,4,"Pistol");
 
-
-
+INSERT INTO INCIDENT
+VALUES (234, 2, 19130, '1', 'Impeding Traffic', '2025-10-02', FALSE);
+INSERT INTO INCIDENT
+VALUES (452, 1, 43430, 'TE1090', 'Hit and Run', '2025-10-03', FALSE);
+INSERT INTO INCIDENT
+VALUES (345, 4, 10030, 'VB2308', 'Hit and Run', '2025-10-04', FALSE);
+INSERT INTO INCIDENT
+VALUES (333, 3, 13430, 'TR3409', 'Stolen Vehicle', '2025-10-05', TRUE);
+INSERT INTO INCIDENT
+VALUES (567, 4, 10030, 'TY4509', 'Hit and Run', '2025-10-06', FALSE);
+INSERT INTO INCIDENT
+VALUES (436, 1, 13450, 'WQ1000', 'Destruction of Property', '2025-10-02', FALSE);
+-- returns all citizens with last name Doe
 SELECT Name
 FROM CITIZEN
 WHERE Name LIKE '%Doe';
+-- returns all officers involved in an incident
+SELECT o.BadgeNumber, c.Name, c.Street, c.City, c.State, c.Zipcode, i.Type
+FROM INCIDENT i
+JOIN OFFICER o ON i.Id = o.Id
+JOIN CITIZEN c ON o.Id = c.Id;
+
