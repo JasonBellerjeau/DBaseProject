@@ -119,9 +119,12 @@ VALUES (436, 1, 13450, 'WQ1000', 'Destruction of Property', '2025-10-02', FALSE)
 SELECT Name
 FROM CITIZEN
 WHERE Name LIKE '%Doe';
--- returns all officers involved in an incident
-SELECT o.BadgeNumber, c.Name, c.Street, c.City, c.State, c.Zipcode, i.Type
+-- returns all officers involved in an incident 2 or more times
+SELECT c.Name, c.Street, c.City, c.State, c.Zipcode
 FROM INCIDENT i
 JOIN OFFICER o ON i.Id = o.Id
-JOIN CITIZEN c ON o.Id = c.Id;
+JOIN CITIZEN c ON o.Id = c.Id
+GROUP BY o.BadgeNumber, c.Name, c.Street, c.City, c.State, c.Zipcode
+HAVING COUNT(i.IncidentID)>=2;
+
 
